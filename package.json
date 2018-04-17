@@ -1,0 +1,24 @@
+{
+  "name": "magmer-server-rest",
+  "version": "1.0.0",
+  "description": "REST API for Magmer project",
+  "main": "src/index.js",
+  "author": "Nikolay Kachanov <bulian1311@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {}
+}
