@@ -11,10 +11,14 @@ const CONFIG = require('./config/config');
 const jwtCheck = expressJwt({ secret: CONFIG.jwt_secret });
 
 const app = express();
-mongoose.connect(CONFIG.mongo_db);
+
+//DB connect
+mongoose.connect(CONFIG.mongo_db).catch(err => console.error(err));
 
 app.use('*', cors());
 app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Routes
 require('./routes/index')(app);
@@ -35,4 +39,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-app.listen(CONFIG.port);
+app.listen(CONFIG.port, () => {
+  console.log(`Run on port:${CONFIG.port}`);
+});
