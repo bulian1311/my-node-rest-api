@@ -1,58 +1,60 @@
-const Item = require('../models/itemsModel');
+const Product = require('../models/productModel');
 
-const itemsController = {
+const productController = {
   getAll: async (req, res) => {
-    const items = await Item.find();
+    const products = await Product.find();
 
-    return res.status(200).json(items);
+    return res.status(200).json(products);
   },
+
   getOne: async (req, res) => {
     const { id } = req.params;
 
     try {
-      const item = await Item.findById({ _id: id });
+      const product = await Product.findById(id);
+      return res.status(200).json(product);
     } catch (err) {
       res.status(404).json({ message: 'No valid entry found for provided ID' });
     }
-
-    if (!item) {
-      return res.status(404).json({ message: 'Not found' });
-    }
-
-    return res.status(200).json(item);
   },
+
   create: async (req, res) => {
     const { title, description } = req.body;
-    const item = new Item({ title, description });
+    const product = new Product({ title, description });
 
     try {
-      await item.save();
-      res.status(200).json(item);
+      await product.save();
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
   },
+
   update: async (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
 
     try {
-      const item = await Item.findByIdAndUpdate(id, { title, description });
-      res.status(200).json(item);
+      const product = await Product.findByIdAndUpdate(id, {
+        title,
+        description
+      });
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
   },
+
   delete: async (req, res) => {
     const { id } = req.params;
 
     try {
-      const item = await Item.findByIdAndRemove(id);
-      res.status(200).json(item);
+      const product = await Product.findByIdAndRemove(id);
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
   }
 };
 
-module.exports = itemsController;
+module.exports = productController;
