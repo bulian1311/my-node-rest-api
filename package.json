@@ -6,8 +6,8 @@
   "author": "Nikolay Kachanov <bulian1311@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "prod": "node src/index.js",
+    "start": "nodemon src/index.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",

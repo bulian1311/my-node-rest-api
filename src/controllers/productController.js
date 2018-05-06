@@ -2,7 +2,11 @@ const Product = require('../models/productModel');
 
 const productController = {
   getAll: async (req, res) => {
-    const products = await Product.find();
+    try {
+      const products = await Product.find();
+    } catch (err) {
+      res.status(400).send(err);
+    }
 
     return res.status(200).json(products);
   },
@@ -14,12 +18,13 @@ const productController = {
       const product = await Product.findById(id);
       return res.status(200).json(product);
     } catch (err) {
-      res.status(404).json({ message: 'No valid entry found for provided ID' });
+      res.status(400).send(err);
     }
   },
 
   create: async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, url, company, tags, images } = req.body;
+
     const product = new Product({ title, description });
 
     try {
