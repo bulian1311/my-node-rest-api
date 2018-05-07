@@ -4,10 +4,10 @@ const imageController = {
   getAll: async (req, res) => {
     try {
       const images = await Image.find();
+      res.status(200).json(images);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(images);
   },
 
   getOne: async (req, res) => {
@@ -15,10 +15,10 @@ const imageController = {
 
     try {
       const image = await Image.findById(id);
+      res.status(200).json(image);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(image);
   },
 
   create: async (req, res) => {
@@ -28,10 +28,10 @@ const imageController = {
 
     try {
       await image.save();
+      res.status(200).json(image);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(image);
   },
 
   update: async (req, res) => {
@@ -44,10 +44,10 @@ const imageController = {
         description,
         url
       });
+      res.status(200).json(image);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(image);
   },
 
   delete: async (req, res) => {
@@ -55,10 +55,10 @@ const imageController = {
 
     try {
       const image = await Image.findByIdAndRemove(id);
+      res.status(200).json(image);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(image);
   }
 };
 

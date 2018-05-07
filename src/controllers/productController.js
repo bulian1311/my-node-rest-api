@@ -4,11 +4,10 @@ const productController = {
   getAll: async (req, res) => {
     try {
       const products = await Product.find();
+      res.status(200).json(products);
     } catch (err) {
       res.status(400).send(err);
     }
-
-    return res.status(200).json(products);
   },
 
   getOne: async (req, res) => {
@@ -16,7 +15,7 @@ const productController = {
 
     try {
       const product = await Product.findById(id);
-      return res.status(200).json(product);
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
@@ -29,10 +28,10 @@ const productController = {
 
     try {
       await product.save();
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(product);
   },
 
   update: async (req, res) => {
@@ -44,10 +43,10 @@ const productController = {
         title,
         description
       });
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(product);
   },
 
   delete: async (req, res) => {
@@ -55,10 +54,10 @@ const productController = {
 
     try {
       const product = await Product.findByIdAndRemove(id);
+      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(product);
   }
 };
 

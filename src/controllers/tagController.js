@@ -4,10 +4,10 @@ const tagController = {
   getAll: async (req, res) => {
     try {
       const tags = await Tag.find();
+      res.status(200).json(tags);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(tags);
   },
 
   getOne: async (req, res) => {
@@ -15,10 +15,10 @@ const tagController = {
 
     try {
       const tag = await Tag.findById(id);
+      res.status(200).json(tag);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(tag);
   },
 
   create: async (req, res) => {
@@ -27,11 +27,10 @@ const tagController = {
 
     try {
       await tag.save();
+      res.status(200).json(tag);
     } catch (err) {
       res.status(400).send(err);
     }
-
-    res.status(200).json(tag);
   },
 
   update: async (req, res) => {
@@ -40,11 +39,10 @@ const tagController = {
 
     try {
       const tag = await Tag.findByIdAndUpdate(id, { title, description });
+      res.status(200).json(tag);
     } catch (err) {
       res.status(400).send(err);
     }
-
-    res.status(200).json(tag);
   },
 
   delete: async (req, res) => {
@@ -52,10 +50,10 @@ const tagController = {
 
     try {
       const tag = await Tag.findByIdAndRemove(id);
+      res.status(200).json(tag);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(tag);
   }
 };
 

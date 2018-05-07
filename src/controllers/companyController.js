@@ -4,11 +4,10 @@ const companyController = {
   getAll: async (req, res) => {
     try {
       const companies = await Company.find();
+      res.status(200).json(companies);
     } catch (err) {
       res.status(400).send(err);
     }
-
-    return res.status(200).json(companies);
   },
 
   getOne: async (req, res) => {
@@ -16,10 +15,10 @@ const companyController = {
 
     try {
       const company = await Company.findById(id);
+      res.status(200).json(company);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(company);
   },
 
   create: async (req, res) => {
@@ -29,10 +28,10 @@ const companyController = {
 
     try {
       await company.save();
+      res.status(200).json(company);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(company);
   },
 
   update: async (req, res) => {
@@ -45,10 +44,10 @@ const companyController = {
         description,
         url
       });
+      res.status(200).json(company);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(company);
   },
 
   delete: async (req, res) => {
@@ -56,10 +55,10 @@ const companyController = {
 
     try {
       const company = await Company.findByIdAndRemove(id);
+      res.status(200).json(company);
     } catch (err) {
       res.status(400).send(err);
     }
-    res.status(200).json(company);
   }
 };
 
