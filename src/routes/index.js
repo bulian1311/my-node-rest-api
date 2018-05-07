@@ -1,4 +1,5 @@
 const expressJwt = require('express-jwt');
+const CONFIG = require('../config/config');
 
 const productRoute = require('./productRoute');
 const companyRoute = require('./companyRoute');
