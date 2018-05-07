@@ -51,7 +51,7 @@ const tagController = {
     const { id } = req.params;
 
     try {
-      const tag = Tag.findByIdAndRemove(id);
+      const tag = await Tag.findByIdAndRemove(id);
     } catch (err) {
       res.status(400).send(err);
     }
