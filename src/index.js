@@ -2,13 +2,10 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const expressJwt = require('express-jwt');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 const CONFIG = require('./config/config');
-
-const jwtCheck = expressJwt({ secret: CONFIG.jwt_secret });
 
 const app = express();
 
@@ -38,6 +35,9 @@ app.use((error, req, res, next) => {
     }
   });
 });
+
+// const fakeData = require('./fakeData');
+// fakeData();
 
 app.listen(CONFIG.port, () => {
   console.log(`Run on port:${CONFIG.port}`);

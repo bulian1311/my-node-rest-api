@@ -25,14 +25,14 @@ const productController = {
   create: async (req, res) => {
     const { title, description, url, company, tags, images } = req.body;
 
-    const product = new Product({ title, description });
+    const product = new Product({ title, description, url });
 
     try {
       await product.save();
-      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
+    res.status(200).json(product);
   },
 
   update: async (req, res) => {
@@ -44,10 +44,10 @@ const productController = {
         title,
         description
       });
-      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
+    res.status(200).json(product);
   },
 
   delete: async (req, res) => {
@@ -55,10 +55,10 @@ const productController = {
 
     try {
       const product = await Product.findByIdAndRemove(id);
-      res.status(200).json(product);
     } catch (err) {
       res.status(400).send(err);
     }
+    res.status(200).json(product);
   }
 };
 
