@@ -10,11 +10,52 @@ const companyController = {
 
     return res.status(200).json(companies);
   },
+
   getOne: async (req, res) => {
     const { id } = req.params;
 
     try {
       const company = await Company.findById(id);
+    } catch (err) {
+      res.status(400).send(err);
+    }
+    res.status(200).json(company);
+  },
+
+  create: async (req, res) => {
+    const { title, description, url } = req.body;
+
+    const company = new Company({ title, description, url });
+
+    try {
+      await company.save();
+    } catch (err) {
+      res.status(400).send(err);
+    }
+    res.status(200).json(company);
+  },
+
+  update: async (req, res) => {
+    const { id } = req.params;
+    const { title, description, url } = req.body;
+
+    try {
+      const company = await Company.findByIdAndUpdate(id, {
+        title,
+        description,
+        url
+      });
+    } catch (err) {
+      res.status(400).send(err);
+    }
+    res.status(200).json(company);
+  },
+
+  delete: async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const company = await Company.findByIdAndRemove(id);
     } catch (err) {
       res.status(400).send(err);
     }
