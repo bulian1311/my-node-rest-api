@@ -13,6 +13,6 @@ module.exports = app => {
   app.use('/products', productRoute);
   app.use('/companies', companyRoute);
   app.use('/tags', tagRoute);
-  app.use('/images', imageRoute);
+  app.use('/images', jwtCheck, imageRoute);
   app.use('/users', userRoute);
 };

@@ -5,7 +5,7 @@ const CONFIG = require('../config/config');
 
 const userController = {
   signup: async (req, res) => {
-    const { email, password } = req.params;
+    const { email, password } = req.body;
 
     const existUser = await User.findOne({ where: { email } });
 
@@ -25,18 +25,18 @@ const userController = {
   },
 
   login: async (req, res) => {
-    const { email, password } = req.params;
+    const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
-      return res.status(404).json({ message: 'Email is incorrect' });
+      return res.status(401).json({ message: 'Email is incorrect' });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return res.status(404).json({ message: 'Password is incorrect' });
+      return res.status(401).json({ message: 'Password is incorrect' });
     }
 
     user.token = await jwt.sign({ id: user.id }, CONFIG.jwt_secret);
