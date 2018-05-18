@@ -17,9 +17,7 @@ const userController = {
 
     await User.create({ email, password: hash });
 
-    const user = await User.findOne({ where: { email } });
-
-    user.token = await jwt.sign({ id: user.id }, CONFIG.jwt_secret);
+    const user = await User.findOne({ email });
 
     return res.status(200).json({ message: 'Signup success', user });
   },
@@ -27,21 +25,20 @@ const userController = {
   login: async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ message: 'Email is incorrect' });
+      res.status(401).json({ message: 'invalid email or password' });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return res.status(401).json({ message: 'Password is incorrect' });
+      res.status(401).json({ message: 'invalid email or password' });
     }
+    const token = await jwt.sign({ id: user.id }, CONFIG.jwt_secret);
 
-    user.token = await jwt.sign({ id: user.id }, CONFIG.jwt_secret);
-
-    return res.status(200).json({ message: 'Login success', user });
+    res.status(200).json({ message: 'Login success', token });
   }
 };
 

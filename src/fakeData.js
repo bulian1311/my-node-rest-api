@@ -3,6 +3,7 @@ const Company = require('./models/companyModel');
 const Tag = require('./models/tagModel');
 const Image = require('./models/imageModel');
 const User = require('./models/userModel');
+const bcrypt = require('bcrypt');
 
 module.exports = async () => {
   const product1 = new Product({
@@ -54,6 +55,9 @@ module.exports = async () => {
   product2.images.push(image);
   product2.tags.push(tag);
   product2.company = company;
+
+  const hash = await bcrypt.hash('131187', 10);
+  await User.create({ email: 'nikolay1311@yandex.ru', password: hash });
 
   try {
     await tag.save();
