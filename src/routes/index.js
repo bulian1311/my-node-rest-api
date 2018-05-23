@@ -1,18 +1,16 @@
 const expressJwt = require('express-jwt');
-const CONFIG = require('../config/config');
 
-const productRoute = require('./productRoute');
-const companyRoute = require('./companyRoute');
-const tagRoute = require('./tagRoute');
-const imageRoute = require('./imageRoute');
-const userRoute = require('./userRoute');
-
-const jwtCheck = expressJwt({ secret: CONFIG.jwt_secret });
+const productRouter = require('./productRouter');
+const companyRouter = require('./companyRouter');
+const tagRouter = require('./tagRouter');
+const imageRouter = require('./imageRouter');
+const userRouter = require('./userRouter');
+const botRouter = require('./botRouter');
 
 module.exports = app => {
-  app.use('/products', productRoute);
-  app.use('/companies', companyRoute);
-  app.use('/tags', tagRoute);
-  app.use('/images', jwtCheck, imageRoute);
-  app.use('/users', userRoute);
+  app.use('/products', productRouter);
+  app.use('/companies', companyRouter);
+  app.use('/tags', tagRouter);
+  app.use('/images', jwtCheck, imageRouter);
+  app.use('/users', userRouter);
 };
