@@ -4,7 +4,9 @@ const { Schema } = mongoose;
 const productSchema = Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
+  price: { type: String, required: true },
   url: { type: String, required: true },
+
   createdAt: { type: Date, default: Date.now },
 
   company: { type: Schema.Types.ObjectId, ref: 'Company' },

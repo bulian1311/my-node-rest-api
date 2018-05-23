@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const tagSchema = Schema({
-  title: { type: String, required: true, unique: true },
-  description: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   createdAt: { type: Date, default: Date.now },
 
   products: [{ type: Schema.Types.ObjectId, ref: 'Product' }]
